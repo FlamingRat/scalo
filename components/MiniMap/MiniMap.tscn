@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1vmrksf6xlo3"]
+[gd_scene load_steps=3 format=3 uid="uid://d1vmrksf6xlo3"]
 
 [ext_resource type="Script" path="res://components/MiniMap/MiniMap.cs" id="1_20ruc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mo4ui"]
+bg_color = Color(0.706869, 0.571525, 0.444972, 1)
 
 [node name="MiniMap" type="CanvasLayer" node_paths=PackedStringArray("Minimap")]
 script = ExtResource("1_20ruc")
@@ -10,12 +13,13 @@ Minimap = NodePath("Panel/Center/Tiles")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 56.0
-offset_top = 49.0
-offset_right = -56.0
-offset_bottom = -49.0
+offset_left = -32.0
+offset_top = -23.0
+offset_right = 32.0
+offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mo4ui")
 
 [node name="Center" type="Control" parent="Panel"]
 layout_mode = 1

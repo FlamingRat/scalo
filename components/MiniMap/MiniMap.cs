@@ -1,31 +1,33 @@
 [Tool]
 public partial class MiniMap : CanvasLayer
 {
-    public const float MaxMiniMapScale = 1f;
-    public const float MinMiniMapScale = 0.1f;
-    public const float ZoomSpeed = 0.1f;
+    public const float MaxPlayerScale = 1f;
+    public const float MinPlayerScale = 0.1f;
+    public const float ZoomSpeed = 1f;
 
     [Export]
-    public TileMapLayer MainMap;
+    public TileMapLayer World;
 
     [Export]
     public TileMapLayer Minimap;
 
+    [Export]
+    public Node2D Player;
+
     public override void _Ready()
     {
-        if (!Engine.IsEditorHint())
-        {
-            Visible = false;
+        if (Engine.IsEditorHint()) return;
 
-            Minimap.TileSet = MainMap.TileSet;
-            Minimap.TileMapData = MainMap.TileMapData;
-        }
+        Visible = false;
+
+        Minimap.TileSet = World.TileSet;
+        Minimap.TileMapData = World.TileMapData;
     }
 
     public override void _Process(double delta)
     {
         if (Engine.IsEditorHint()) EditorProcess();
-        else Process(delta);
+        else Process((float)delta);
     }
 
     public override void _Input(InputEvent @event)
@@ -36,20 +38,25 @@ public partial class MiniMap : CanvasLayer
         }
     }
 
-    private void Process(double delta)
+    private void Process(float delta)
     {
-        var zoom = Input.GetAxis(KeyMap.MapZoomOut, KeyMap.MapZoomIn);
-        Minimap.Scale += Vector2.One * zoom * (float)delta;
+        Minimap.GlobalScale = Vector2.One / Player.GlobalScale * 0.4f;
 
-        Minimap.Scale = Minimap.Scale.Clamp(MinMiniMapScale, MaxMiniMapScale);
+        if (!Visible) return;
+
+        var zoom = Input.GetAxis(KeyMap.MapZoomOut, KeyMap.MapZoomIn);
+        if (zoom == 0) return;
+
+        Player.GlobalScale -= Vector2.One * zoom * ZoomSpeed * delta;
+
+        Player.GlobalScale = Player.GlobalScale.Clamp(MinPlayerScale, MaxPlayerScale);
     }
 
     private void EditorProcess()
     {
-        if (Minimap != null && MainMap != null)
-        {
-            Minimap.TileSet = MainMap.TileSet;
-            Minimap.TileMapData = MainMap.TileMapData;
-        }
+        if (Minimap == null && World == null) return;
+
+        Minimap.TileSet = World.TileSet;
+        Minimap.TileMapData = World.TileMapData;
     }
 }

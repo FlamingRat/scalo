@@ -23,7 +23,7 @@ public partial class Player : CharacterBody2D
         var direction = Input.GetAxis(KeyMap.MoveL, KeyMap.MoveR);
         if (direction != 0f)
         {
-            velocity.X = direction * Speed;
+            velocity.X = direction * Speed * Scale.X;
         }
         else
         {
