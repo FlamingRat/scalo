@@ -3,18 +3,10 @@ public partial class Player : CharacterBody2D
     public const float Speed = 300.0f;
     public override void _PhysicsProcess(double delta)
     {
-        ApplyGravity(delta);
         ApplyXMovement();
+        ApplyYMovement(delta);
 
         MoveAndSlide();
-    }
-
-    private void ApplyGravity(double delta)
-    {
-        if (!IsOnFloor())
-        {
-            Velocity += GetGravity() * (float)delta * GlobalScale.X;
-        }
     }
 
     private void ApplyXMovement()
@@ -28,6 +20,26 @@ public partial class Player : CharacterBody2D
         else
         {
             velocity.X = Mathf.MoveToward(Velocity.X, 0, Speed);
+        }
+
+        Velocity = velocity;
+    }
+
+    private void ApplyYMovement(double delta)
+    {
+        var velocity = Velocity;
+        var direction = Input.GetAxis(KeyMap.ClimbUp, KeyMap.ClimbDown);
+        if (direction != 0f && IsOnWall())
+        {
+            velocity.Y = direction * Speed * Scale.Y;
+        }
+        else if (!IsOnFloor())
+        {
+            velocity += GetGravity() * (float)delta * GlobalScale.X;
+        }
+        else
+        {
+            velocity.Y = 0f;
         }
 
         Velocity = velocity;
