@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bk0mriwfokdtq"]
+
+[ext_resource type="Script" path="res://components/Player/Player.cs" id="1_ox134"]
+[ext_resource type="Texture2D" uid="uid://b4c7cgmgf25vf" path="res://assets/tiles/tilemap-characters_packed.png" id="1_up4r7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5gnta"]
+size = Vector2(20, 24)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_ox134")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5gnta")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_up4r7")
+flip_h = true
+hframes = 9
+vframes = 3
