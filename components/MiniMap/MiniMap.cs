@@ -21,6 +21,9 @@ public partial class MiniMap : CanvasLayer
         {
             var copy = (TileMapLayer)layer.Duplicate();
             MinimapContainer.AddChild(copy);
+
+            copy.TileSet = (TileSet)copy.TileSet.Duplicate();
+            copy.TileSet.RemovePhysicsLayer(0);
         }
 
         Visible = false;
