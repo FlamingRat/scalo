@@ -6,6 +6,6 @@ public partial class PlayerCamera : Camera2D
 
     public override void _Process(double delta)
     {
-        Zoom = Vector2.One / Player.Scale * 2f;
+        Zoom = Vector2.One / Player.Scale * 1.5f;
     }
 }
