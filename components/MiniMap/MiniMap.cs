@@ -24,6 +24,11 @@ public partial class MiniMap : CanvasLayer
 
             copy.TileSet = (TileSet)copy.TileSet.Duplicate();
             copy.TileSet.RemovePhysicsLayer(0);
+
+            foreach (var coords in copy.GetUsedCells())
+            {
+                copy.SetCell(coords, 1, new Vector2I(0, 0));
+            }
         }
 
         Visible = false;
