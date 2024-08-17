@@ -23,3 +23,9 @@ vframes = 3
 script = ExtResource("3_yak3h")
 Player = NodePath("..")
 Sprite = NodePath("../Sprite")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.5, 1.5)
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
