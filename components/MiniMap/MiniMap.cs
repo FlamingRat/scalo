@@ -1,33 +1,44 @@
-[Tool]
+using System.Linq;
+
 public partial class MiniMap : CanvasLayer
 {
-    public const float MaxPlayerScale = 1f;
-    public const float MinPlayerScale = 0.1f;
-    public const float ZoomSpeed = 1f;
+    public const float MaxPlayerScale = 8f;
+    public const float MinPlayerScale = 0.5f;
+    public const float ZoomSpeed = 5f;
 
     [Export]
-    public TileMapLayer World;
+    public TileMapLayer[] Tilemaps;
 
     [Export]
-    public TileMapLayer Minimap;
+    public Control MinimapContainer;
 
     [Export]
     public Node2D Player;
 
     public override void _Ready()
     {
-        if (Engine.IsEditorHint()) return;
+        foreach (var layer in Tilemaps)
+        {
+            var copy = (TileMapLayer)layer.Duplicate();
+            MinimapContainer.AddChild(copy);
+        }
 
         Visible = false;
 
-        Minimap.TileSet = World.TileSet;
-        Minimap.TileMapData = World.TileMapData;
+        UpdateMinimap();
     }
 
     public override void _Process(double delta)
     {
-        if (Engine.IsEditorHint()) EditorProcess();
-        else Process((float)delta);
+        if (!Visible) return;
+
+        UpdateMinimap();
+
+        var zoom = Input.GetAxis(KeyMap.MapZoomOut, KeyMap.MapZoomIn);
+        if (zoom == 0) return;
+
+        Player.GlobalScale -= Vector2.One * zoom * ZoomSpeed * (float)delta;
+        Player.GlobalScale = Player.GlobalScale.Clamp(MinPlayerScale, MaxPlayerScale);
     }
 
     public override void _Input(InputEvent @event)
@@ -38,25 +49,8 @@ public partial class MiniMap : CanvasLayer
         }
     }
 
-    private void Process(float delta)
+    private void UpdateMinimap()
     {
-        Minimap.GlobalScale = Vector2.One / Player.GlobalScale * 0.4f;
-
-        if (!Visible) return;
-
-        var zoom = Input.GetAxis(KeyMap.MapZoomOut, KeyMap.MapZoomIn);
-        if (zoom == 0) return;
-
-        Player.GlobalScale -= Vector2.One * zoom * ZoomSpeed * delta;
-
-        Player.GlobalScale = Player.GlobalScale.Clamp(MinPlayerScale, MaxPlayerScale);
-    }
-
-    private void EditorProcess()
-    {
-        if (Minimap == null && World == null) return;
-
-        Minimap.TileSet = World.TileSet;
-        Minimap.TileMapData = World.TileMapData;
+        MinimapContainer.Scale = Vector2.One / Player.GlobalScale * 0.4f;
     }
 }
