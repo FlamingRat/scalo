@@ -13,7 +13,7 @@ public partial class Player : CharacterBody2D
     {
         if (!IsOnFloor())
         {
-            Velocity += GetGravity() * (float)delta;
+            Velocity += GetGravity() * (float)delta * GlobalScale.X;
         }
     }
 
