@@ -1,6 +1,7 @@
 public partial class Player : CharacterBody2D
 {
     public const float Speed = 300.0f;
+    public const float ClimbSpeed = 150.0f;
     public override void _PhysicsProcess(double delta)
     {
         ApplyXMovement();
@@ -31,7 +32,7 @@ public partial class Player : CharacterBody2D
         var direction = Input.GetAxis(KeyMap.ClimbUp, KeyMap.ClimbDown);
         if (direction != 0f && IsOnWall())
         {
-            velocity.Y = direction * Speed * Scale.Y;
+            velocity.Y = direction * ClimbSpeed * Scale.Y;
         }
         else if (!IsOnFloor())
         {
