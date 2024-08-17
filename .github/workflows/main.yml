@@ -4,7 +4,7 @@ on: push
 env:
   GODOT_VERSION: 4.3
   EXPORT_NAME: scalo
-  PROJECT_PATH: scalo
+  PROJECT_PATH: .
 
 jobs:
   export-windows:
