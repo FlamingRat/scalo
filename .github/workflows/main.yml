@@ -36,33 +36,39 @@ jobs:
         with:
           name: windows
           path: build/windows
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            build/windows/$EXPORT_NAME.exe
 
-  export-linux:
-    name: Linux Export
-    runs-on: ubuntu-22.04
-    container:
-      image: barichello/godot-ci:mono-4.3
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-      - name: Setup .NET 8.x
-        uses: actions/setup-dotnet@v3
-        with:
-          # Semantic version range syntax or exact version of a dotnet version
-          dotnet-version: '8.x'
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
-      - name: Linux Build
-        run: |
-          cd $PROJECT_PATH
-          mkdir -v -p build/linux
-          godot --headless --verbose --export-release "Linux" build/linux/$EXPORT_NAME.x86_64
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: linux
-          path: build/linux
+  # export-linux:
+  #   name: Linux Export
+  #   runs-on: ubuntu-22.04
+  #   container:
+  #     image: barichello/godot-ci:mono-4.3
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         lfs: true
+  #     - name: Setup .NET 8.x
+  #       uses: actions/setup-dotnet@v3
+  #       with:
+  #         # Semantic version range syntax or exact version of a dotnet version
+  #         dotnet-version: '8.x'
+  #     - name: Setup
+  #       run: |
+  #         mkdir -v -p ~/.local/share/godot/export_templates/
+  #         mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable.mono
+  #     - name: Linux Build
+  #       run: |
+  #         cd $PROJECT_PATH
+  #         mkdir -v -p build/linux
+  #         godot --headless --verbose --export-release "Linux" build/linux/$EXPORT_NAME.x86_64
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v1
+  #       with:
+  #         name: linux
+  #         path: build/linux
