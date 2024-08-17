@@ -3,8 +3,9 @@ using System.Linq;
 public partial class MiniMap : CanvasLayer
 {
     public const float MaxPlayerScale = 8f;
-    public const float MinPlayerScale = 0.5f;
+    public const float MinPlayerScale = 0.4f;
     public const float ZoomSpeed = 5f;
+    public const float MiniMapScale = 0.05f;
 
     [Export]
     public TileMapLayer[] Tilemaps;
@@ -59,6 +60,6 @@ public partial class MiniMap : CanvasLayer
 
     private void UpdateMinimap()
     {
-        MinimapContainer.Scale = Vector2.One / Player.GlobalScale * 0.4f;
+        MinimapContainer.Scale = Vector2.One * MiniMapScale / Player.GlobalScale;
     }
 }
