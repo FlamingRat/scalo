@@ -9,8 +9,8 @@ bg_color = Color(0.706869, 0.571525, 0.444972, 1)
 [node name="MiniMap" type="CanvasLayer" node_paths=PackedStringArray("Tilemaps", "MinimapContainer", "PlayerMarker")]
 script = ExtResource("1_20ruc")
 Tilemaps = []
-MinimapContainer = NodePath("Panel/Center")
-PlayerMarker = NodePath("PlayerMarker")
+MinimapContainer = NodePath("Panel/Center/MinimapContainer")
+PlayerMarker = NodePath("Panel/Center/PlayerMarker")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
@@ -34,7 +34,14 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayerMarker" type="Sprite2D" parent="."]
+[node name="MinimapContainer" type="Control" parent="Panel/Center"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerMarker" type="Sprite2D" parent="Panel/Center"]
+position = Vector2(0, -8)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_1ou2h")
 flip_h = true
 hframes = 9
