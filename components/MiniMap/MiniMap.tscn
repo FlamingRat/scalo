@@ -1,14 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1vmrksf6xlo3"]
+[gd_scene load_steps=4 format=3 uid="uid://d1vmrksf6xlo3"]
 
 [ext_resource type="Script" path="res://components/MiniMap/MiniMap.cs" id="1_20ruc"]
+[ext_resource type="Texture2D" uid="uid://b4c7cgmgf25vf" path="res://assets/tiles/tilemap-characters_packed.png" id="2_1ou2h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mo4ui"]
 bg_color = Color(0.706869, 0.571525, 0.444972, 1)
 
-[node name="MiniMap" type="CanvasLayer" node_paths=PackedStringArray("Tilemaps", "MinimapContainer")]
+[node name="MiniMap" type="CanvasLayer" node_paths=PackedStringArray("Tilemaps", "MinimapContainer", "PlayerMarker")]
 script = ExtResource("1_20ruc")
 Tilemaps = []
 MinimapContainer = NodePath("Panel/Center")
+PlayerMarker = NodePath("PlayerMarker")
 
 [node name="Panel" type="Panel" parent="."]
 anchors_preset = 15
@@ -31,3 +33,9 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PlayerMarker" type="Sprite2D" parent="."]
+texture = ExtResource("2_1ou2h")
+flip_h = true
+hframes = 9
+vframes = 3
