@@ -65,6 +65,7 @@ public partial class MiniMap : CanvasLayer
         if (Input.IsActionJustPressed(KeyMap.Map) && !Engine.IsEditorHint())
         {
             Visible = !Visible;
+            GetTree().Paused = Visible;
         }
     }
 
