@@ -1,3 +1,5 @@
+using System;
+using System.Diagnostics;
 using System.Linq;
 
 public partial class MiniMap : CanvasLayer
@@ -8,19 +10,21 @@ public partial class MiniMap : CanvasLayer
     public const float MiniMapScale = 0.05f;
 
     [Export]
-    public TileMapLayer[] Tilemaps;
+    public TileMapLayer[]? Tilemaps;
 
     [Export]
-    public Control MinimapContainer;
+    public Control? MinimapContainer;
 
     [Export]
-    public Node2D Player;
+    public Node2D? Player;
 
     [Export]
-    public Sprite2D PlayerMarker;
+    public Sprite2D? PlayerMarker;
 
     public override void _Ready()
     {
+        Debug.Assert(Tilemaps != null && MinimapContainer != null);
+
         foreach (var layer in Tilemaps)
         {
             var copy = (TileMapLayer)layer.Duplicate();
@@ -42,6 +46,8 @@ public partial class MiniMap : CanvasLayer
 
     public override void _Process(double delta)
     {
+        Debug.Assert(Player != null);
+
         if (!Visible) return;
 
         UpdateMinimap();
@@ -64,16 +70,14 @@ public partial class MiniMap : CanvasLayer
 
     private void UpdateMinimap()
     {
+        Debug.Assert(MinimapContainer != null && Player != null);
+
         MinimapContainer.Scale = Vector2.One * MiniMapScale / Player.GlobalScale;
     }
 
     private void UpdatePlayerMarker()
     {
-        if (PlayerMarker == null || Player == null)
-        {
-            GD.PrintErr("PlayerMarker not found");
-            return;
-        }
+        Debug.Assert(MinimapContainer != null && Player != null);
 
         Vector2 miniMapPosition = Player.GlobalPosition / Player.GlobalScale * MiniMapScale;
 
