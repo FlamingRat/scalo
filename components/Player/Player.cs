@@ -1,3 +1,5 @@
+using System;
+
 public partial class Player : CharacterBody2D
 {
     public const float Speed = 300.0f;
@@ -13,7 +15,7 @@ public partial class Player : CharacterBody2D
     private void ApplyXMovement()
     {
         var velocity = Velocity;
-        var direction = Input.GetAxis(KeyMap.MoveL, KeyMap.MoveR);
+        var direction = Math.Sign(Input.GetAxis(KeyMap.MoveL, KeyMap.MoveR));
         if (direction != 0f)
         {
             velocity.X = direction * Speed * GlobalScale.X;
@@ -29,7 +31,7 @@ public partial class Player : CharacterBody2D
     private void ApplyYMovement(double delta)
     {
         var velocity = Velocity;
-        var direction = Input.GetAxis(KeyMap.ClimbUp, KeyMap.ClimbDown);
+        var direction = Math.Sign(Input.GetAxis(KeyMap.ClimbUp, KeyMap.ClimbDown));
         if (direction != 0f && IsOnWall())
         {
             velocity.Y = direction * ClimbSpeed * Scale.Y;
