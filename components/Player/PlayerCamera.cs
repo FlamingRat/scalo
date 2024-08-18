@@ -2,7 +2,7 @@
 public partial class PlayerCamera : Camera2D
 {
     [Export]
-    public Node2D Player;
+    public required Node2D Player;
 
     public override void _Process(double delta)
     {

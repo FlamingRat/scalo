@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk0mriwfokdtq"]
+[gd_scene load_steps=8 format=3 uid="uid://bk0mriwfokdtq"]
 
 [ext_resource type="Script" path="res://components/Player/Player.cs" id="1_ox134"]
 [ext_resource type="Texture2D" uid="uid://b4c7cgmgf25vf" path="res://assets/tiles/tilemap-characters_packed.png" id="1_up4r7"]
 [ext_resource type="Script" path="res://components/Player/PlayerAnimationController.cs" id="3_yak3h"]
 [ext_resource type="Script" path="res://components/Player/PlayerCamera.cs" id="4_6awtq"]
+[ext_resource type="Script" path="res://components/Player/Sight.cs" id="5_k2hhh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gnta"]
 size = Vector2(16, 16)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ubtvy"]
+radius = 211.085
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ox134")
@@ -33,3 +37,10 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 script = ExtResource("4_6awtq")
 Player = NodePath("..")
+
+[node name="Sight" type="Area2D" parent="."]
+priority = 1
+script = ExtResource("5_k2hhh")
+
+[node name="SightRange" type="CollisionShape2D" parent="Sight"]
+shape = SubResource("CircleShape2D_ubtvy")

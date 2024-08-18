@@ -5,9 +5,8 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mo4ui"]
 bg_color = Color(0.706869, 0.571525, 0.444972, 1)
 
-[node name="MiniMap" type="CanvasLayer" node_paths=PackedStringArray("Tilemaps", "MinimapContainer")]
+[node name="MiniMap" type="CanvasLayer" node_paths=PackedStringArray("MinimapContainer")]
 script = ExtResource("1_20ruc")
-Tilemaps = []
 MinimapContainer = NodePath("Panel/Center")
 
 [node name="Panel" type="Panel" parent="."]

@@ -1,5 +1,3 @@
-using System.Linq;
-
 public partial class MiniMap : CanvasLayer
 {
     public const float MaxPlayerScale = 8f;
@@ -8,58 +6,75 @@ public partial class MiniMap : CanvasLayer
     public const float MiniMapScale = 0.05f;
 
     [Export]
-    public TileMapLayer[] Tilemaps;
+    public required TileSet MinimapTileset;
 
     [Export]
-    public Control MinimapContainer;
+    public WorldLayer[] Tilemaps = [];
 
     [Export]
-    public Node2D Player;
+    public required Control MinimapContainer;
+
+    [Export]
+    public required Node2D Player;
 
     public override void _Ready()
     {
-        foreach (var layer in Tilemaps)
-        {
-            var copy = (TileMapLayer)layer.Duplicate();
-            MinimapContainer.AddChild(copy);
-
-            copy.TileSet = (TileSet)copy.TileSet.Duplicate();
-            copy.TileSet.RemovePhysicsLayer(0);
-
-            foreach (var coords in copy.GetUsedCells())
+        shadowLayers = Tilemaps
+            .Select(layer =>
             {
-                copy.SetCell(coords, 1, new Vector2I(0, 0));
-            }
-        }
+                var shadowLayer = (TileMapLayer)layer.Duplicate();
+                MinimapContainer.AddChild(shadowLayer);
+
+                shadowLayer.Clear();
+                shadowLayer.TileSet = (TileSet)MinimapTileset.Duplicate();
+                shadowLayer.Scale = layer.TileSet.TileSize;
+
+                return shadowLayer;
+            })
+            .ToArray();
 
         Visible = false;
-
-        UpdateMinimap();
     }
 
     public override void _Process(double delta)
     {
         if (!Visible) return;
 
-        UpdateMinimap();
-
         var zoom = Input.GetAxis(KeyMap.MapZoomOut, KeyMap.MapZoomIn);
         if (zoom == 0) return;
 
         Player.GlobalScale -= Vector2.One * zoom * ZoomSpeed * (float)delta;
         Player.GlobalScale = Player.GlobalScale.Clamp(MinPlayerScale, MaxPlayerScale);
+        MinimapContainer.Scale = Vector2.One * MiniMapScale / Player.GlobalScale;
     }
 
     public override void _Input(InputEvent @event)
     {
-        if (Input.IsActionJustPressed(KeyMap.Map) && !Engine.IsEditorHint())
+        if (Input.IsActionJustPressed(KeyMap.Map))
         {
             Visible = !Visible;
+
+            if (Visible)
+            {
+                UpdateMinimap();
+            }
         }
     }
 
-    private void UpdateMinimap()
+    TileMapLayer[] shadowLayers = [];
+
+    void UpdateMinimap()
     {
-        MinimapContainer.Scale = Vector2.One * MiniMapScale / Player.GlobalScale;
+        shadowLayers
+            .Zip(Tilemaps)
+            .ToList()
+            .ForEach(i =>
+            {
+                var (shadow, tilemap) = i;
+                tilemap.GetUsedCells()
+                    .Where(coords => tilemap.CellAt(coords).Seen)
+                    .ToList()
+                    .ForEach(coords => shadow.SetCell(coords, 0, Vector2I.Zero));
+            });
     }
 }
