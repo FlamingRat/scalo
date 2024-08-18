@@ -16,6 +16,9 @@ public partial class MiniMap : CanvasLayer
     [Export]
     public Node2D Player;
 
+    [Export]
+    public Sprite2D PlayerMarker;
+
     public override void _Ready()
     {
         foreach (var layer in Tilemaps)
@@ -42,6 +45,7 @@ public partial class MiniMap : CanvasLayer
         if (!Visible) return;
 
         UpdateMinimap();
+        UpdatePlayerMarker();
 
         var zoom = Input.GetAxis(KeyMap.MapZoomOut, KeyMap.MapZoomIn);
         if (zoom == 0) return;
@@ -61,5 +65,18 @@ public partial class MiniMap : CanvasLayer
     private void UpdateMinimap()
     {
         MinimapContainer.Scale = Vector2.One * MiniMapScale / Player.GlobalScale;
+    }
+
+    private void UpdatePlayerMarker()
+    {
+        if (PlayerMarker == null || Player == null)
+        {
+            GD.PrintErr("PlayerMarker not found");
+            return;
+        }
+
+        Vector2 miniMapPosition = Player.GlobalPosition / Player.GlobalScale * MiniMapScale;
+
+        MinimapContainer.Position = -miniMapPosition;
     }
 }
