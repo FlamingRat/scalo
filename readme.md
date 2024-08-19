@@ -6,7 +6,7 @@
 - [x] allow green tiles in TinyWorld
 - [x] have an item to collect
 - [ ] make key work
-- [ ] hide secret paths from minimap
+- [x] hide secret paths from minimap
 - [ ] add enemies
 - [ ] main menu
 - [ ] change skins

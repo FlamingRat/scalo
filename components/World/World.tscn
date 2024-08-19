@@ -107,7 +107,7 @@ scale = Vector2(0.5, 0.5)
 Message = "There's nothing to see here, go away!"
 
 [node name="Player" parent="." instance=ExtResource("1_a2dtc")]
-position = Vector2(-2297, 968)
+position = Vector2(22755, 3001)
 scale = Vector2(8, 8)
 
 [node name="MiniMap" parent="." node_paths=PackedStringArray("Level", "Player") instance=ExtResource("3_w4y34")]
