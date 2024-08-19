@@ -5,7 +5,7 @@
 [ext_resource type="FontFile" uid="uid://bo2cnlkqhjq3r" path="res://assets/fonts/Khand-SemiBold.ttf" id="3_s20j8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hgpl7"]
-radius = 10.7
+radius = 10.5385
 
 [node name="Sign" type="Area2D" node_paths=PackedStringArray("MessageBubble", "MessagePanel", "Sprite")]
 scale = Vector2(10, 10)
@@ -15,6 +15,7 @@ MessagePanel = NodePath("CanvasLayer/Panel")
 Sprite = NodePath("Sprite2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3.7)
 shape = SubResource("CircleShape2D_hgpl7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
