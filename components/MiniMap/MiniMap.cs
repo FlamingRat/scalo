@@ -56,7 +56,6 @@ public partial class MiniMap : CanvasLayer
         if (!Visible) return;
 
         UpdateMinimap();
-        UpdatePlayerMarker();
 
         var zoom = Input.GetAxis(KeyMap.MapZoomOut, KeyMap.MapZoomIn);
         if (zoom == 0) return;
@@ -79,14 +78,8 @@ public partial class MiniMap : CanvasLayer
         Debug.Assert(MinimapContainer != null && Player != null);
 
         MinimapContainer.Scale = Vector2.One * MiniMapScale / Player.GlobalScale;
-    }
-
-    private void UpdatePlayerMarker()
-    {
-        Debug.Assert(MinimapContainer != null && Player != null);
 
         Vector2 miniMapPosition = Player.GlobalPosition / Player.GlobalScale * MiniMapScale;
-
         MinimapContainer.Position = -miniMapPosition;
     }
 }
