@@ -5,7 +5,7 @@
 - [x] build a decent level
 - [x] allow green tiles in TinyWorld
 - [x] have an item to collect
-- [ ] make key work
+- [x] make key work
 - [x] hide secret paths from minimap
 - [ ] add enemies
 - [ ] main menu
