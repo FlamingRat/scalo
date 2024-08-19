@@ -4,7 +4,9 @@
 - [x] player cannot move with minimap open
 - [x] build a decent level
 - [x] allow green tiles in TinyWorld
-- [ ] have an item to collect
+- [x] have an item to collect
+- [ ] make key work
+- [ ] hide secret paths from minimap
 - [ ] add enemies
 - [ ] main menu
 - [ ] change skins
