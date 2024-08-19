@@ -6,7 +6,7 @@ public partial class MiniMap : CanvasLayer
     public const float MaxPlayerScale = 8f;
     public const float MinPlayerScale = 0.4f;
     public const float ZoomSpeed = 5f;
-    public const float MiniMapScale = 0.05f;
+    public const float MiniMapScale = 0.5f;
 
     [Export]
     public Level? Level;
