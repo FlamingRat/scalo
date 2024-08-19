@@ -7,3 +7,5 @@
 - [ ] have an item to collect
 - [ ] add enemies
 - [ ] main menu
+- [ ] change skins
+- [ ] fix camera

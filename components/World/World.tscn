@@ -24,10 +24,10 @@ Message = "Hello there. If you're here, you're probably good at climbing. RUNNIN
 position = Vector2(2210, 881)
 Message = "This is a tall wall! I wonder what's on the other side."
 
+[node name="MapSign" parent="Signs" instance=ExtResource("7_tteh7")]
+position = Vector2(5801, 1841)
+Message = "A map would probably be helpful here. Press Esc on your keyboard, or Y on your controller to pull it up."
+
 [node name="Player" parent="." instance=ExtResource("1_a2dtc")]
 position = Vector2(-1578, 956)
 scale = Vector2(8, 8)
-
-[node name="Sign" parent="." instance=ExtResource("7_tteh7")]
-position = Vector2(5801, 1841)
-Message = "A map would probably be helpful here. Press Esc on your keyboard, or Y on your controller to pull it up."
