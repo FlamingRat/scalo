@@ -18,8 +18,8 @@ public partial class Sign : Area2D
 
     public override void _Ready()
     {
-        BodyEntered += OnBodyEntered;
-        BodyExited += OnBodyExited;
+        AreaEntered += OnAreaEntered;
+        AreaExited += OnAreaExited;
 
         Debug.Assert(MessagePanel != null);
         MessagePanel.Visible = false;
@@ -27,11 +27,11 @@ public partial class Sign : Area2D
 
     long LastMessageTimestamp;
 
-    async void OnBodyEntered(Node2D body)
+    async void OnAreaEntered(Node2D area)
     {
         Debug.Assert(Message != null && MessageBubble != null && Sprite != null && MessagePanel != null);
 
-        if (body is not Player) return;
+        if (area is not Sight) return;
 
         var tween = CreateTween();
         tween.SetEase(Tween.EaseType.OutIn);
@@ -61,11 +61,11 @@ public partial class Sign : Area2D
         tween.TweenProperty(Sprite, "position", Vector2.Zero, 0.1f);
     }
 
-    void OnBodyExited(Node2D body)
+    void OnAreaExited(Node2D area)
     {
         Debug.Assert(MessageBubble != null && MessagePanel != null);
 
-        if (body is not Player) return;
+        if (area is not Sight) return;
 
         MessageBubble.Text = "";
         MessagePanel.Visible = false;
