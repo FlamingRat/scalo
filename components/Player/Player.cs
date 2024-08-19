@@ -4,6 +4,8 @@ public partial class Player : CharacterBody2D
 {
     public const float Speed = 300.0f;
     public const float ClimbSpeed = 150.0f;
+
+    public bool Climbing { get { return climbing; } }
     public override void _PhysicsProcess(double delta)
     {
         ApplyXMovement();
@@ -28,11 +30,15 @@ public partial class Player : CharacterBody2D
         Velocity = velocity;
     }
 
+    bool climbing = false;
+
     private void ApplyYMovement(double delta)
     {
         var velocity = Velocity;
         var direction = Math.Sign(Input.GetAxis(KeyMap.ClimbUp, KeyMap.ClimbDown));
-        if (direction != 0f && IsOnWall())
+        climbing = direction != 0f && IsOnWall();
+
+        if (Climbing)
         {
             velocity.Y = direction * ClimbSpeed * Scale.Y;
         }
