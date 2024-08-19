@@ -1,9 +1,9 @@
 # todo
 
-- [ ] signs with tutorials
+- [x] signs with tutorials
 - [x] player cannot move with minimap open
-- [ ] build a decent level
-- [ ] allow green tiles in TinyWorld
+- [x] build a decent level
+- [x] allow green tiles in TinyWorld
 - [ ] have an item to collect
 - [ ] add enemies
 - [ ] main menu
