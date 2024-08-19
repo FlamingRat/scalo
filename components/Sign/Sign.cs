@@ -25,20 +25,47 @@ public partial class Sign : Area2D
         MessagePanel.Visible = false;
     }
 
-    long LastMessageTimestamp;
-
-    async void OnAreaEntered(Node2D area)
+    void OnAreaEntered(Node2D area)
     {
-        Debug.Assert(Message != null && MessageBubble != null && Sprite != null && MessagePanel != null);
+        Debug.Assert(Sprite != null && MessagePanel != null);
 
         if (area is not Sight) return;
 
-        var tween = CreateTween();
-        tween.SetEase(Tween.EaseType.OutIn);
-        tween.TweenProperty(Sprite, "position", Vector2.Up * 8, 0.1f);
-        tween.TweenCallback(Callable.From(Fall));
 
         MessagePanel.Visible = true;
+
+        AnimateHop();
+        RollMessage();
+    }
+
+    void OnAreaExited(Node2D area)
+    {
+        Debug.Assert(MessageBubble != null && MessagePanel != null);
+
+        if (area is not Sight) return;
+
+        MessageBubble.Text = "";
+        MessagePanel.Visible = false;
+    }
+
+    void AnimateHop()
+    {
+        var tween = CreateTween();
+        tween.TweenProperty(Sprite, "position", Vector2.Up * 8, 0.1f);
+
+        tween.Finished += async () =>
+        {
+            await Task.Delay(50);
+            var tween = CreateTween();
+            tween.TweenProperty(Sprite, "position", Vector2.Zero, 0.1f);
+        };
+    }
+
+    long LastMessageTimestamp;
+
+    async void RollMessage()
+    {
+        Debug.Assert(Message != null && MessageBubble != null);
         MessageBubble.Text = "";
 
         var messageTimestamp = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeMilliseconds();
@@ -74,22 +101,5 @@ public partial class Sign : Area2D
             advanceChar();
             await Task.Delay(20);
         }
-    }
-
-    void Fall()
-    {
-        var tween = CreateTween();
-        tween.SetEase(Tween.EaseType.OutIn);
-        tween.TweenProperty(Sprite, "position", Vector2.Zero, 0.1f);
-    }
-
-    void OnAreaExited(Node2D area)
-    {
-        Debug.Assert(MessageBubble != null && MessagePanel != null);
-
-        if (area is not Sight) return;
-
-        MessageBubble.Text = "";
-        MessagePanel.Visible = false;
     }
 }
