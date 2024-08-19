@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -24,6 +25,8 @@ public partial class Sign : Area2D
         MessagePanel.Visible = false;
     }
 
+    long LastMessageTimestamp;
+
     async void OnBodyEntered(Node2D body)
     {
         Debug.Assert(Message != null && MessageBubble != null && Sprite != null && MessagePanel != null);
@@ -38,12 +41,16 @@ public partial class Sign : Area2D
         MessagePanel.Visible = true;
         MessageBubble.Text = "";
 
+        var messageTimestamp = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeMilliseconds();
+        LastMessageTimestamp = messageTimestamp;
         var remainingMessage = Message;
         while (remainingMessage.Length > 0)
         {
+            if (LastMessageTimestamp != messageTimestamp) break;
+
             MessageBubble.Text += remainingMessage[0];
             remainingMessage = remainingMessage[1..];
-            await Task.Delay(40);
+            await Task.Delay(20);
         }
     }
 
