@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://djbyy7sqe1wc7"]
+[gd_scene load_steps=3 format=3 uid="uid://djbyy7sqe1wc7"]
 
 [ext_resource type="Texture2D" uid="uid://06vaifmyugvp" path="res://assets/tiles/tilemap_packed.png" id="1_o4t7j"]
-[ext_resource type="PackedScene" uid="uid://dk4ew4o4g0asq" path="res://components/Pickup/Pickup.tscn" id="2_gclf1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o7j6e"]
 size = Vector2(166, 110)
@@ -19,5 +18,3 @@ texture = ExtResource("1_o4t7j")
 hframes = 20
 vframes = 9
 frame = 27
-
-[node name="Pickup" parent="." instance=ExtResource("2_gclf1")]

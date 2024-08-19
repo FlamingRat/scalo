@@ -1,15 +1,23 @@
 public partial class Pickup : Area2D
 {
-    public enum PickupType
+    public enum ItemType
     {
-        Key
+        Key,
+        Lock,
+    }
+
+    public enum InteractionID
+    {
+        Test,
+        FakeLock,
+        TutorialLock,
     }
 
     [Export]
-    public PickupType Type;
+    public ItemType Type;
 
     [Export]
-    public string? Data;
+    public InteractionID Interaction;
 
     public override void _Ready()
     {
@@ -20,7 +28,7 @@ public partial class Pickup : Area2D
     {
         if (area is not PickupCollector collector) return;
 
-        collector.Collect(this);
+        if (!collector.Collect(this)) return;
 
         var tween = GetParent().CreateTween();
         tween.TweenProperty(GetParent(), "global_scale", Vector2.Zero, 0.1f);
