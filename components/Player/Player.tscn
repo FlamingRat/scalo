@@ -12,10 +12,11 @@ size = Vector2(16, 16)
 script = ExtResource("1_ox134")
 
 [node name="Hitbox" type="CollisionShape2D" parent="."]
-position = Vector2(0, 4)
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_5gnta")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -12)
 texture = ExtResource("1_up4r7")
 flip_h = true
 hframes = 9

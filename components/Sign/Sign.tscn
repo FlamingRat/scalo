@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://dfccp0kousm4s"]
+
+[ext_resource type="Script" path="res://components/Sign/Sign.cs" id="1_wrob5"]
+[ext_resource type="Texture2D" uid="uid://06vaifmyugvp" path="res://assets/tiles/tilemap_packed.png" id="2_5ie6x"]
+[ext_resource type="FontFile" uid="uid://bo2cnlkqhjq3r" path="res://assets/fonts/Khand-SemiBold.ttf" id="3_s20j8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hgpl7"]
+radius = 25.02
+
+[node name="Sign" type="Area2D" node_paths=PackedStringArray("MessageBubble", "MessagePanel", "Sprite")]
+scale = Vector2(10, 10)
+script = ExtResource("1_wrob5")
+MessageBubble = NodePath("CanvasLayer/Panel/MessageBubble")
+MessagePanel = NodePath("CanvasLayer/Panel")
+Sprite = NodePath("Sprite2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hgpl7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_5ie6x")
+hframes = 20
+vframes = 9
+frame = 86
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 251.0
+offset_top = 467.0
+offset_right = -251.0
+offset_bottom = -27.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MessageBubble" type="Label" parent="CanvasLayer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 10.0
+offset_right = -8.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_s20j8")
+theme_override_font_sizes/font_size = 18
+text = "lorem ipsum blablabla"
+autowrap_mode = 3
