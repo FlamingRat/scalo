@@ -16,6 +16,7 @@ position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_5gnta")
 
 [node name="Sprite" type="Sprite2D" parent="."]
+z_index = 2
 position = Vector2(0, -12)
 texture = ExtResource("1_up4r7")
 flip_h = true

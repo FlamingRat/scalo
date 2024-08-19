@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics;
 using System.Linq;
 
@@ -10,7 +9,7 @@ public partial class MiniMap : CanvasLayer
     public const float MiniMapScale = 0.05f;
 
     [Export]
-    public TileMapLayer[]? Tilemaps;
+    public Level? Level;
 
     [Export]
     public Control? MinimapContainer;
@@ -21,12 +20,18 @@ public partial class MiniMap : CanvasLayer
     [Export]
     public Sprite2D? PlayerMarker;
 
+    TileMapLayer[] Tilemaps = [];
+
     public override void _Ready()
     {
-        Debug.Assert(Tilemaps != null && MinimapContainer != null);
+        Debug.Assert(Level != null && MinimapContainer != null);
 
-        foreach (var layer in Tilemaps)
+        foreach (var child in Level.GetChildren())
         {
+            if (child is not TileMapLayer layer) continue;
+
+            Tilemaps.Append(layer);
+
             var copy = (TileMapLayer)layer.Duplicate();
             MinimapContainer.AddChild(copy);
 

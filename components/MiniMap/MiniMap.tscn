@@ -6,10 +6,9 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mo4ui"]
 bg_color = Color(0.706869, 0.571525, 0.444972, 1)
 
-[node name="MiniMap" type="CanvasLayer" node_paths=PackedStringArray("Tilemaps", "MinimapContainer", "PlayerMarker")]
+[node name="MiniMap" type="CanvasLayer" node_paths=PackedStringArray("MinimapContainer", "PlayerMarker")]
 process_mode = 3
 script = ExtResource("1_20ruc")
-Tilemaps = []
 MinimapContainer = NodePath("Panel/Center/MinimapContainer")
 PlayerMarker = NodePath("Panel/Center/PlayerMarker")
 

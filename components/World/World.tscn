@@ -9,19 +9,19 @@
 
 [node name="LevelDesign" parent="." instance=ExtResource("1_xqw6l")]
 
-[node name="MiniMap" parent="." node_paths=PackedStringArray("Tilemaps", "Player") instance=ExtResource("3_w4y34")]
+[node name="MiniMap" parent="." node_paths=PackedStringArray("Level", "Player") instance=ExtResource("3_w4y34")]
 visible = false
-Tilemaps = [null, null]
+Level = NodePath("../LevelDesign")
 Player = NodePath("../Player")
 
 [node name="Sign_ClimbTutorial" parent="." instance=ExtResource("7_tteh7")]
-position = Vector2(70, 542)
+position = Vector2(-880, 870)
 Message = "Hello there. If you're here, you're probably good at climbing. RUNNING INTO WALLS AND PUSHING UP sure is fun!"
 
 [node name="Sign_TallWall" parent="." instance=ExtResource("7_tteh7")]
-position = Vector2(2329, 870)
+position = Vector2(2210, 881)
 Message = "This is a tall wall! I wonder what's on the other side."
 
 [node name="Player" parent="." instance=ExtResource("1_a2dtc")]
-position = Vector2(99, -129)
+position = Vector2(-1578, 956)
 scale = Vector2(8, 8)
