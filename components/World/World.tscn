@@ -70,16 +70,15 @@ tile_set = SubResource("TileSet_6g5x6")
 
 [node name="LevelDesign" parent="." instance=ExtResource("1_xqw6l")]
 
-[node name="MiniMap" parent="." node_paths=PackedStringArray("Level", "Player") instance=ExtResource("3_w4y34")]
-visible = false
-Level = NodePath("../LevelDesign")
-Player = NodePath("../Player")
-
 [node name="Signs" type="Node" parent="."]
 
 [node name="ClimbTutorial" parent="Signs" instance=ExtResource("7_tteh7")]
 position = Vector2(-880, 870)
 Message = "Hello there. If you're here, you're probably good at climbing. RUNNING INTO WALLS AND PUSHING UP sure is fun!"
+
+[node name="MovementTip" parent="Signs" instance=ExtResource("7_tteh7")]
+position = Vector2(95.9999, 539)
+Message = "By the way, you can move with WASD, the keyboard arrows, or a controller."
 
 [node name="TallWall" parent="Signs" instance=ExtResource("7_tteh7")]
 position = Vector2(2210, 881)
@@ -110,3 +109,8 @@ Message = "There's nothing to see here, go away!"
 [node name="Player" parent="." instance=ExtResource("1_a2dtc")]
 position = Vector2(-2297, 968)
 scale = Vector2(8, 8)
+
+[node name="MiniMap" parent="." node_paths=PackedStringArray("Level", "Player") instance=ExtResource("3_w4y34")]
+visible = false
+Level = NodePath("../LevelDesign")
+Player = NodePath("../Player")

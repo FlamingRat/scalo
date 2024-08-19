@@ -35,12 +35,11 @@ public partial class Player : CharacterBody2D
     private void ApplyYMovement(double delta)
     {
         var velocity = Velocity;
-        var direction = Math.Sign(Input.GetAxis(KeyMap.ClimbUp, KeyMap.ClimbDown));
-        climbing = direction != 0f && IsOnWall();
+        climbing = Input.IsActionPressed(KeyMap.ClimbUp) && IsOnWall();
 
         if (Climbing)
         {
-            velocity.Y = direction * ClimbSpeed * Scale.Y;
+            velocity.Y = -ClimbSpeed * Scale.Y;
         }
         else if (!IsOnFloor())
         {
