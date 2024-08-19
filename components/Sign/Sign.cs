@@ -8,7 +8,7 @@ public partial class Sign : Area2D
     public string? Message;
 
     [Export]
-    public Label? MessageBubble;
+    public RichTextLabel? MessageBubble;
 
     [Export]
     public Panel? MessagePanel;
@@ -44,12 +44,34 @@ public partial class Sign : Area2D
         var messageTimestamp = ((DateTimeOffset)DateTime.UtcNow).ToUnixTimeMilliseconds();
         LastMessageTimestamp = messageTimestamp;
         var remainingMessage = Message;
+        var nextChar = remainingMessage[0];
+        var advanceChar = () =>
+        {
+            MessageBubble.Text += nextChar;
+            remainingMessage = remainingMessage[1..];
+
+            if (remainingMessage.Length == 0) return;
+            nextChar = remainingMessage[0];
+        };
+
         while (remainingMessage.Length > 0)
         {
             if (LastMessageTimestamp != messageTimestamp) break;
 
-            MessageBubble.Text += remainingMessage[0];
-            remainingMessage = remainingMessage[1..];
+            if (nextChar == ' ')
+            {
+                advanceChar();
+            }
+
+            if (nextChar == '[')
+            {
+                while (nextChar != ']')
+                {
+                    advanceChar();
+                }
+            }
+
+            advanceChar();
             await Task.Delay(20);
         }
     }
