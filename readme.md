@@ -10,4 +10,4 @@
 - [ ] add enemies
 - [ ] main menu
 - [ ] change skins
-- [ ] fix camera
+- [x] fix camera
