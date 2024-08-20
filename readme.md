@@ -1,4 +1,8 @@
-# todo
+# Scalo
+
+## [Credits](credits.md)
+
+## To do
 
 - [x] signs with tutorials
 - [x] player cannot move with minimap open
