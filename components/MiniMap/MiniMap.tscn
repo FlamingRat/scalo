@@ -46,3 +46,4 @@ texture = ExtResource("2_1ou2h")
 flip_h = true
 hframes = 9
 vframes = 3
+frame = 4

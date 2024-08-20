@@ -6,8 +6,8 @@ public partial class PlayerAnimationController : Node
 
     static class PlayerSpriteFrame
     {
-        public const int Idle = 0;
-        public const int Airborne = 1;
+        public const int Idle = 4;
+        public const int Airborne = 5;
 
         public static int WalkAnimation(int current)
         {

@@ -41,6 +41,7 @@ texture = ExtResource("1_up4r7")
 flip_h = true
 hframes = 9
 vframes = 3
+frame = 4
 
 [node name="PlayerAnimationController" type="Node" parent="." node_paths=PackedStringArray("Player", "Sprite")]
 script = ExtResource("3_yak3h")
