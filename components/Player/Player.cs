@@ -2,7 +2,7 @@ using System;
 
 public partial class Player : CharacterBody2D
 {
-    public const float Speed = 300.0f;
+    public const float Speed = 400.0f;
     public const float ClimbSpeed = 150.0f;
 
     public bool Climbing { get { return climbing; } }
