@@ -91,4 +91,5 @@ Checkpoint+={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.268324, 0.201474, 0.135535, 1)
