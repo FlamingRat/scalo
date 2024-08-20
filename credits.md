@@ -4,10 +4,11 @@
 - [chikorito](https://chikorito.land)
 - Edge
 
-## Ideation & testing
+## Ideation & playtesting
 
 - Natata
 - Edge
+- Nytezerak
 
 # Assets used
 - ["Pixel Platformer" by Kenney](https://www.kenney.nl/assets/pixel-platformer)
