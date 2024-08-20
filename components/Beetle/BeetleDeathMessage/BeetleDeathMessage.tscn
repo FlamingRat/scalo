@@ -1,0 +1,152 @@
+[gd_scene load_steps=7 format=3 uid="uid://dcxj5updwf83b"]
+
+[ext_resource type="FontFile" uid="uid://bo2cnlkqhjq3r" path="res://assets/fonts/Khand-SemiBold.ttf" id="1_oamq7"]
+[ext_resource type="Script" path="res://components/SelfDestruct/SelfDestruct.cs" id="2_7jvl2"]
+
+[sub_resource type="Animation" id="Animation_6h734"]
+resource_name = "popup"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.233333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.266667, 1.06667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-121, 0), Vector2(-121, -200)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RichTextLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.266667, 1.06667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RichTextLabel:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.207694]
+}
+
+[sub_resource type="Animation" id="Animation_7cx2n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RichTextLabel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("RichTextLabel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-121, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RichTextLabel:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RichTextLabel:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6yn8c"]
+_data = {
+"RESET": SubResource("Animation_7cx2n"),
+"popup": SubResource("Animation_6h734")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ayjst"]
+animation = &"popup"
+
+[node name="BeetleDeathMessage" type="Control"]
+z_index = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = -121.0
+offset_top = -8.33333
+offset_right = 161.0
+offset_bottom = 138.667
+pivot_offset = Vector2(120, 50)
+theme_override_constants/outline_size = 39
+theme_override_fonts/normal_font = ExtResource("1_oamq7")
+theme_override_font_sizes/normal_font_size = 96
+bbcode_enabled = true
+text = "[center][color=orange]Crack![/color][/center]"
+fit_content = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_6yn8c")
+}
+
+[node name="SelfDestruct" type="Node" parent="." node_paths=PackedStringArray("Destroy")]
+script = ExtResource("2_7jvl2")
+Destroy = NodePath("..")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeAnimation_ayjst")
+anim_player = NodePath("../AnimationPlayer")

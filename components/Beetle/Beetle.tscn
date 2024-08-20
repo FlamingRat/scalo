@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgmyek04wr12v"]
+
+[ext_resource type="Script" path="res://components/Beetle/Beetle.cs" id="1_18qyr"]
+[ext_resource type="Texture2D" uid="uid://b4c7cgmgf25vf" path="res://assets/tiles/tilemap-characters_packed.png" id="1_v3u3v"]
+[ext_resource type="PackedScene" uid="uid://dcxj5updwf83b" path="res://components/Beetle/BeetleDeathMessage/BeetleDeathMessage.tscn" id="2_3dao4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oget2"]
+size = Vector2(13, 12)
+
+[node name="Beetle" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_18qyr")
+DeathMessage = ExtResource("2_3dao4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_v3u3v")
+hframes = 9
+vframes = 3
+frame = 18
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 6)
+shape = SubResource("RectangleShape2D_oget2")

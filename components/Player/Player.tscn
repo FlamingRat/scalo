@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bk0mriwfokdtq"]
+[gd_scene load_steps=12 format=3 uid="uid://bk0mriwfokdtq"]
 
 [ext_resource type="Script" path="res://components/Player/Player.cs" id="1_ox134"]
 [ext_resource type="Texture2D" uid="uid://b4c7cgmgf25vf" path="res://assets/tiles/tilemap-characters_packed.png" id="1_up4r7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://components/Player/PlayerAnimationController.cs" id="3_yak3h"]
 [ext_resource type="Script" path="res://components/Player/PlayerCamera.cs" id="4_6awtq"]
 [ext_resource type="Script" path="res://components/Pickup/PickupCollector.cs" id="6_kc0wu"]
+[ext_resource type="Script" path="res://components/Player/PlayerHurtbox.cs" id="7_70y6m"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_daxf4"]
 
@@ -14,6 +15,9 @@ size = Vector2(16, 16)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_alve7"]
 radius = 15.0333
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oybjq"]
+size = Vector2(18, 2)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_ox134")
@@ -56,3 +60,10 @@ script = ExtResource("6_kc0wu")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PickupCollector"]
 position = Vector2(0, -11)
 shape = SubResource("CircleShape2D_alve7")
+
+[node name="PlayerHurtbox" type="Area2D" parent="." node_paths=PackedStringArray("Player")]
+script = ExtResource("7_70y6m")
+Player = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource("RectangleShape2D_oybjq")
