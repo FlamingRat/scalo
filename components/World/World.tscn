@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://1qdukeprc0as"]
+[gd_scene load_steps=10 format=4 uid="uid://1qdukeprc0as"]
 
 [ext_resource type="PackedScene" uid="uid://bk0mriwfokdtq" path="res://components/Player/Player.tscn" id="1_a2dtc"]
 [ext_resource type="Texture2D" uid="uid://bou7i7b0a3xjt" path="res://assets/tiles/tilemap-backgrounds_packed.png" id="1_fusn7"]
 [ext_resource type="PackedScene" uid="uid://cwigsa8bkfm7k" path="res://components/Level/Level.tscn" id="1_xqw6l"]
 [ext_resource type="PackedScene" uid="uid://d1vmrksf6xlo3" path="res://components/MiniMap/MiniMap.tscn" id="3_w4y34"]
 [ext_resource type="PackedScene" uid="uid://cgmyek04wr12v" path="res://components/Beetle/Beetle.tscn" id="6_wmkp5"]
+[ext_resource type="PackedScene" uid="uid://cwg8emectwut8" path="res://components/Checkpoint/Checkpoint.tscn" id="7_qlx0w"]
 [ext_resource type="PackedScene" uid="uid://dfccp0kousm4s" path="res://components/Sign/Sign.tscn" id="7_tteh7"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5s6wb"]
@@ -94,8 +95,8 @@ position = Vector2(16505, -1690)
 Message = "Looks like there is a [color=yellow]lock[/color] up ahead. Maybe if you squint at the map you can find some other way. With the map open, use [color=yellow]Q and E[/color] (or [color=yellow]LT and RT[/color]) to zoom in and out."
 
 [node name="MiniSign" parent="Signs" instance=ExtResource("7_tteh7")]
-position = Vector2(16743, -1595)
-scale = Vector2(0.5, 0.5)
+position = Vector2(16743, -1604)
+scale = Vector2(0.05, 0.05)
 Message = "It seems when you look at the world a different way, you can also [color=yellow]change[/color]."
 
 [node name="RealLock" parent="Signs" instance=ExtResource("7_tteh7")]
@@ -107,6 +108,67 @@ position = Vector2(16197, 2386)
 scale = Vector2(0.5, 0.5)
 Message = "There's nothing to see here, go away!"
 
+[node name="Beetles" type="Node" parent="."]
+
+[node name="Beetle" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(7236, 582)
+
+[node name="Beetle2" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(1828, 751)
+
+[node name="Beetle3" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(7169, -2181)
+
+[node name="Beetle4" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(2033, -3157)
+
+[node name="Beetle5" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(11121, 443)
+
+[node name="Beetle6" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(9249, 1851)
+
+[node name="Beetle7" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(12465, 1691)
+
+[node name="Beetle8" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(15265, -1685)
+
+[node name="Beetle9" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(16896, 1387)
+
+[node name="Beetle10" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(17111, 2321)
+
+[node name="Beetle11" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(17911, 1716)
+
+[node name="Beetle12" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(22805, 541)
+
+[node name="Beetle13" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(18272, -1669)
+
+[node name="Beetle14" parent="Beetles" instance=ExtResource("6_wmkp5")]
+position = Vector2(-1165, 910)
+
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("7_qlx0w")]
+position = Vector2(-2257, 870)
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("7_qlx0w")]
+position = Vector2(2630, -3124)
+
+[node name="Checkpoint3" parent="Checkpoints" instance=ExtResource("7_qlx0w")]
+position = Vector2(11541, 1834)
+
+[node name="Checkpoint4" parent="Checkpoints" instance=ExtResource("7_qlx0w")]
+position = Vector2(21440, 2957)
+
+[node name="Checkpoint5" parent="Checkpoints" instance=ExtResource("7_qlx0w")]
+position = Vector2(23042, -1680)
+
 [node name="Player" parent="." instance=ExtResource("1_a2dtc")]
 position = Vector2(-2256, 924)
 scale = Vector2(8, 8)
@@ -115,45 +177,3 @@ scale = Vector2(8, 8)
 visible = false
 Level = NodePath("../LevelDesign")
 Player = NodePath("../Player")
-
-[node name="Beetle" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(7236, 582)
-
-[node name="Beetle2" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(1828, 751)
-
-[node name="Beetle3" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(7169, -2181)
-
-[node name="Beetle4" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(2033, -3157)
-
-[node name="Beetle5" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(11121, 443)
-
-[node name="Beetle6" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(9249, 1851)
-
-[node name="Beetle7" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(12465, 1691)
-
-[node name="Beetle8" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(15265, -1685)
-
-[node name="Beetle9" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(16896, 1387)
-
-[node name="Beetle10" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(17111, 2321)
-
-[node name="Beetle11" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(17911, 1716)
-
-[node name="Beetle12" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(22805, 541)
-
-[node name="Beetle13" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(18272, -1669)
-
-[node name="Beetle14" parent="." instance=ExtResource("6_wmkp5")]
-position = Vector2(-1165, 910)

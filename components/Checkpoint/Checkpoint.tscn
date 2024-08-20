@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwg8emectwut8"]
+
+[ext_resource type="Texture2D" uid="uid://06vaifmyugvp" path="res://assets/tiles/tilemap_packed.png" id="1_iimoq"]
+[ext_resource type="Script" path="res://components/Checkpoint/Checkpoint.cs" id="1_wo6dg"]
+[ext_resource type="PackedScene" uid="uid://bwqd0q5gnexy3" path="res://components/AlertBox/AlertBox.tscn" id="3_tudfd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mda2p"]
+radius = 106.019
+
+[node name="Checkpoint" type="Area2D" node_paths=PackedStringArray("Sprite")]
+script = ExtResource("1_wo6dg")
+Sprite = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+modulate = Color(0.552956, 0.552956, 0.552956, 1)
+scale = Vector2(10, 10)
+texture = ExtResource("1_iimoq")
+hframes = 20
+vframes = 9
+frame = 64
+
+[node name="AlertBox" parent="." instance=ExtResource("3_tudfd")]
+Message = "[color=lightblue]Checkpoint reached![/color]
+
+Use [color=yellow]R and T[/color] or your controller's [color=yellow]D-pad[/color] to teleport between checkpoints."
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -37)
+shape = SubResource("CircleShape2D_mda2p")

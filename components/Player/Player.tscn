@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bk0mriwfokdtq"]
+[gd_scene load_steps=13 format=3 uid="uid://bk0mriwfokdtq"]
 
 [ext_resource type="Script" path="res://components/Player/Player.cs" id="1_ox134"]
 [ext_resource type="Texture2D" uid="uid://b4c7cgmgf25vf" path="res://assets/tiles/tilemap-characters_packed.png" id="1_up4r7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://components/Player/PlayerCamera.cs" id="4_6awtq"]
 [ext_resource type="Script" path="res://components/Pickup/PickupCollector.cs" id="6_kc0wu"]
 [ext_resource type="Script" path="res://components/Player/PlayerHurtbox.cs" id="7_70y6m"]
+[ext_resource type="Script" path="res://components/Player/CheckpointHandler.cs" id="8_um2ux"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_daxf4"]
 
@@ -57,7 +58,7 @@ Player = NodePath("..")
 [node name="PickupCollector" type="Area2D" parent="."]
 script = ExtResource("6_kc0wu")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupCollector"]
+[node name="PickupRange" type="CollisionShape2D" parent="PickupCollector"]
 position = Vector2(0, -11)
 shape = SubResource("CircleShape2D_alve7")
 
@@ -65,5 +66,10 @@ shape = SubResource("CircleShape2D_alve7")
 script = ExtResource("7_70y6m")
 Player = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+[node name="StompRange" type="CollisionShape2D" parent="PlayerHurtbox"]
 shape = SubResource("RectangleShape2D_oybjq")
+
+[node name="CheckpointHandler" type="Node" parent="." node_paths=PackedStringArray("DetectArea", "Player")]
+script = ExtResource("8_um2ux")
+DetectArea = NodePath("../PickupCollector")
+Player = NodePath("..")

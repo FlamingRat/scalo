@@ -6,4 +6,6 @@ public static class KeyMap
     public const string Map = "Map";
     public const string MapZoomIn = "MapZoomIn";
     public const string MapZoomOut = "MapZoomOut";
+    public const string CheckpointPrev = "Checkpoint-";
+    public const string CheckpointNext = "Checkpoint+";
 }
